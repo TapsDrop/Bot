@@ -1,136 +1,112 @@
-from telegram import InlineKeyboardButton, InlineKeyboardMarkup
-from telegram.ext import ApplicationBuilder, CommandHandler, CallbackQueryHandler, MessageHandler, filters
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Promo Code Generator</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="favicon.png" type="image/x-icon">
+</head>
+<body>
+    <div class="container">
+        <h1>Game Promo Code Generator</h1>
+        <div class="form-group">
+            <label for="gameSelect">Select Game</label>
+            <select id="gameSelect">
+                <option value="1">ZooPolis </option>
+                <option value="2">Coming Soon...</option>
+                <option value="3">Snake Run(new)</option>
+                <option value="4">Train Miner</option>
+                <option value="5">Merge Away </option>
+                <option value="6">Cooking Stories (new)</option>
+                <option value="7">Polysphere</option>
+                <option value="8">Snake Run</option>
+                <option value="9">Factory World </option>
+                <option value="10">Stone Age </option>
+                <option value="11">Bouncemasters </option>
+                <option value="12">Hide Ball </option>
+                <option value="13">Infected Frontier </option>
+                <option value="14">Count Masters</option>
+            
+                
+                
 
-TOKEN = '7669492702:AAH1TUztT4WzBMmgpEgavHgalmDHO-evszw'
+            </select>
+        </div>
 
-codes_memory = {
-    "ZOO": [f"ZOO-{i}" for i in range(1, 101)],
-    "TILE": [f"TILE-{i}" for i in range(1, 101)],
-    "CUBE": [f"CUBE-{i}" for i in range(1, 101)],
-    "TRAIN": [f"TRAIN-{i}" for i in range(1, 101)],
-    "MERGE": [f"MERGE-{i}" for i in range(1, 101)],
-    "TWERK": [
-        "TWERK-YEH-Y3QW-ZXMX-CZX",
-        "TWERK-XE1-V3V6-ZMK9-FBJ",
-        "TWERK-XDS-SLW1-ZDKH-CH5",
-        "TWERK-WES-RM4F-ZDL9-FNR",
-        "TWERK-ZEM-SZ77-ZML2-T9Y",
-        "TWERK-WDM-R9FP-Z9K2-V4Y",
-        "TWERK-ZE5-YXDF-ZFMA-TE6",
-        "TWERK-XES-YVCF-ZZLA-2E8",
-        "TWERK-XES-VBQX-ZBNW-1FZ",
-        "TWERK-WDM-RR74-Z5LA-TYY",
-        "TWERK-YEH-T15J-ZBLJ-YX1",
-        "TWERK-WES-Y2PM-Z3MW-29A",
-        "TWERK-XE1-Z3AZ-ZBNJ-67X",
-        "TWERK-ZED-Y76Q-Z9K2-84P",
-        "TWERK-XE1-VYWT-ZHKW-BXN",
-        "TWERK-XE1-X3P8-ZVLA-EHM"
-    ],
-    "POLY": [f"POLY-{i}" for i in range(1, 101)],
-    "TRIM": [f"TRIM-{i}" for i in range(1, 101)],
-    "STONE": [f"STONE-{i}" for i in range(1, 101)],
-    "BOUNC": [
-        "BOUNC-WGE-NTLX-Z1ZZ-7HH",
-        "BOUNC-ZGN-LTL1-Z1XF-KJD",
-        "BOUNC-YFJ-KDAG-ZFXZ-GH1",
-        "BOUNC-WF6-FSYN-Z3YZ-GHM",
-        "BOUNC-YF6-LDRG-Z1Z7-KHB",
-        "BOUNC-WF6-HDDX-Z9Y7-BK2",
-        "BOUNC-ZFA-MS3W-ZHZF-LKR",
-        "BOUNC-ZGW-HR59-ZKWQ-9Q3",
-        "BOUNC-XG6-NRB7-ZFXZ-DPV",
-        "BOUNC-YGE-LEXH-ZZWF-LQA",
-        "BOUNC-XG2-MENM-ZZWZ-EGM",
-        "BOUNC-YGE-JEPL-Z5ZF-GGJ",
-        "BOUNC-ZFW-GEHS-Z3XZ-FJ2",
-        "BOUNC-ZFR-F1NM-Z7YQ-M8T"
-    ],
-    "HIDE": [f"HIDE-{i}" for i in range(1, 101)],
-    "WATER": [
-        "WATER-YFE-ADFK-ZVZ4-G9Z",
-        "WATER-YFN-9HL9-ZMYT-LD1",
-        "WATER-ZFJ-AJJ3-ZZZT-FZW",
-        "WATER-YFJ-92J2-ZVYT-873",
-        "WATER-WGE-AKGG-Z5XC-9BA",
-        "WATER-YGN-E4VH-ZXWL-LXQ",
-        "WATER-WFN-9X2K-ZVYS-1VX",
-        "WATER-WGA-79ZQ-Z9XM-1RY",
-        "WATER-XFE-9WR4-Z3ZD-1BW",
-        "WATER-ZFJ-EVJ3-ZMYS-4WS",
-        "WATER-XF2-9V1J-Z7X5-52K",
-        "WATER-ZF2-CVFS-Z9XM-VA8",
-        "WATER-ZFR-8TP5-Z1WS-YL6",
-        "WATER-XF6-7DKN-ZHXM-ZRT",
-        "WATER-YF2-BSNW-ZFZ5-VSK",
-        "WATER-XGW-7SXN-ZSX5-PRX"
-    ]
-}
+        <div id="google_translate_element"></div>
+        <script type="text/javascript">
+            function googleTranslateElementInit() {
+                new google.translate.TranslateElement({
+                    pageLanguage: 'en', 
+                    includedLanguages: 'en,hi,ta,ru,id,ha,pt', 
+                    layout: google.translate.TranslateElement.InlineLayout.SIMPLE
+                }, 'google_translate_element');
+            }
+            
+        </script>
+        <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+        
 
-user_selected_game = {}
+        
+        <div class="form-group">
+            <label id="keyCountLabel" for="keyCountSelect">Number of keys:</label>
+            <select id="keyCountSelect">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="8">8</option>
+                
+            </select>
+        </div>
+        <button id="startBtn">Generate Keys</button>
+        
+        <div id="progressContainer" class="hidden">
+            <div class="progress-bar">
+                <div id="progressBar"></div>
+            </div>
+            <div id="progressText">0%</div>
+            <div id="progressLog">Starting...</div>
+            <div id="countdownContainer">
+            <p>Next Step will start in: <span id="countdownTimer"></span> seconds </p>
+            </div>
+        </div>
+        <div id="keyContainer" class="hidden">
+            <h3 id="generatedKeysTitle" class="hidden">Generated Keys:</h3>
+            <div id="keysList"></div>
+            <button id="copyAllBtn" class="hidden">Copy All Keys</button>
+            <div id="copyStatus" class="hidden">Copied!</div>
+            <!-- <button id="generateMoreBtn">Generate More Keys</button> -->
+        </div>
 
-async def start(update, context):
-    keyboard = [
-        [InlineKeyboardButton("ZOO", callback_data='ZOO')],
-        [InlineKeyboardButton("TILE", callback_data='TILE')],
-        [InlineKeyboardButton("CUBE", callback_data='CUBE')],
-        [InlineKeyboardButton("TRAIN", callback_data='TRAIN')],
-        [InlineKeyboardButton("MERGE", callback_data='MERGE')],
-        [InlineKeyboardButton("TWERK", callback_data='TWERK')],
-        [InlineKeyboardButton("POLY", callback_data='POLY')],
-        [InlineKeyboardButton("TRIM", callback_data='TRIM')],
-        [InlineKeyboardButton("STONE", callback_data='STONE')],
-        [InlineKeyboardButton("BOUNC", callback_data='BOUNC')],
-        [InlineKeyboardButton("HIDE", callback_data='HIDE')],
-        [InlineKeyboardButton("WATER", callback_data='WATER')],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await update.message.reply_text('Please select a game to add or get codes:', reply_markup=reply_markup)
 
-async def button(update, context):
-    query = update.callback_query
-    game_name = query.data
-    user_id = query.from_user.id
-    user_selected_game[user_id] = game_name
-    keyboard = [
-        [InlineKeyboardButton("Add Codes", callback_data=f'add_{game_name}')],
-        [InlineKeyboardButton("Get Codes", callback_data=f'get_{game_name}')],
-    ]
-    reply_markup = InlineKeyboardMarkup(keyboard)
-    await query.edit_message_text(f"Game {game_name} selected. Choose an action:", reply_markup=reply_markup)
+        <label>
+            <input type="checkbox" id="logCheckbox"> Enable Logs
+        </label>
+        <textarea id="logArea" rows="3" readonly style="width: 100%; resize: none; font-size: 12px; display: none;"></textarea>
 
-async def add_codes(update, context):
-    user_id = update.message.from_user.id
-    if user_id in user_selected_game:
-        game_name = user_selected_game[user_id]
-        new_codes = update.message.text.splitlines()
+        <div class="mycodes">
+            <p>
+                The Key Generation may take upto 10 mins<br>
+                Wanna Earn More on Crypto AirDrop for FREE 👉<a href="https://t.me/Insta_Buy_Follower/136">Join Verified Bot 🔜 </a>
+            </p>
+            <button id="ShowKeysBtn">My Codes</button>
+            <div id="generatedCodesContainer" style="display:none;">
+                <h3>Today's Generated Codes:</h3>
+                <ul id="generatedCodesList"></ul>
+            </div>
 
-        if len(new_codes) == 16:
-            codes_memory[game_name].extend(new_codes)
-            await update.message.reply_text(f"16 new codes added to {game_name}.")
-        else:
-            await update.message.reply_text("Please send exactly 16 codes.")
-    else:
-        await update.message.reply_text("Select a game first using /start.")
+        </div>
+        <div class="footer">
+            <p>Disclaimer: This tool is for educational purposes only. Use responsibly.
+                Any Issues in the Key Generation 👉<a href="https://t.me/Insta_Buy_Follower/118"> Check FAQ'S </a>
+            <button id="telegramChannelBtn">Check out Our Telegram Channel 🆔</button></p>
+            <button id="creatorChannelBtn">Contact Creator 🤖</button> 
+            
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
 
-async def get_codes(update, context):
-    query = update.callback_query
-    game_name = query.data.split('_')[1]
-    if game_name in codes_memory and len(codes_memory[game_name]) >= 4:
-        selected_codes = codes_memory[game_name][:4]
-        codes_memory[game_name] = codes_memory[game_name][4:]
-        await query.edit_message_text(f"Here are 4 codes from {game_name}: \n" + "\n".join(selected_codes))
-    else:
-        await query.edit_message_text(f"Not enough codes available in {game_name}.")
-
-def main():
-    application = ApplicationBuilder().token(TOKEN).build()
-    application.add_handler(CommandHandler("start", start))
-    application.add_handler(CallbackQueryHandler(button, pattern='^(?!add_|get_).*'))
-    application.add_handler(CallbackQueryHandler(get_codes, pattern='^get_'))
-    application.add_handler(MessageHandler(filters.TEXT & ~filters.COMMAND, add_codes))
-
-    application.run_polling()
-
-if __name__ == '__main__':
-    main()
+</html>
